@@ -1,0 +1,5 @@
+tareas pendientes:
+
+1 validar los inputs {listo}
+2  hacer la parte de ayuda al cliente {}
+3 hacer que al final se le envie un correo al cliente con un mensaje (puede ser un documento o no se eso lo vemos en el futuro) {listo}

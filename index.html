@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="css/income.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="icon" href="img/logo.png">
+  <title>Asegura aqui!</title>
+</head>
+<body>
+  <header class="header flex items-center justify-center h-[55vh] w-full" id="inicio">
+    <nav class="nav fixed top-0 flex justify-center items-center h-14 w-full bg-white border-b-2 border-green-400 px-4 z-40">   
+      <div class="box-accesorios flex justify-between items-center max-w-4xl w-full mx-auto">
+        <div class="title_logo flex justify-evenly items-center text-lg cursor-pointer" title="logo">
+          <h2>Asegura Aqui!</h2>
+          <img src="img/logo.png" class="object-center w-7" alt="logo">
+        </div>
+        <div class="lines hidden md:block">
+          <a class="mx-3 border-b-2 border-green-400 hover:border-green-500 duration-200" href="#inicio">Inicio</a>
+          <a class="mx-3 border-b-2 border-transparent hover:border-green-400 duration-200" href="#nosotros">¿Quiénes somos?</a>
+          <a class="mx-3 border-b-2 border-transparent hover:border-green-300 duration-200" href="income.html">Asegurar</a>
+          <a class="lin_sercio mx-3 border-b-2 border-transparent hover:border-green-200 duration-200" href="#">Servicios</a>
+          <a class="mx-3 border-b-2 border-transparent hover:border-green-200 duration-200" href="#Contactos">Contactos</a>
+        </div>
+        <div class="menu block md:hidden w-10 rounded-full cursor-pointer"><img src="img/menu.png" alt="menu" title="menu"></div>
+      </div>
+    </nav>
+    <div class="menu_lateral hidden md:hidden flex-col justify-center items-center fixed top-0 left-0 right-0 bottom-0 w-screen bg-emerald-500 z-50">
+      <a class="exit_menu absolute flex items-center justify-center top-3 right-8 text-red-600 text-2xl rounded-full bg-white h-8 w-8" href="#">x</a>
+      <div class="list_menu flex flex-col items-center text-white gap-16">
+        <a class="lin text-xl" href="#inicio">Inicio</a>  
+        <a class="lin text-xl" href="#nosotros">¿Quiénes somos?</a>  
+        <a class="lin text-xl" href="income.html">Asegurar</a>
+        <a class="lin lin_sercio text-xl" href="#">Servicios</a>  
+        <a class="lin text-xl" href="#Contactos">Contactos</a>  
+      </div>
+    </div>
+    <div style="background-image: url('img/Background_Portada.jpg');" class="relative flex justify-center items-center flex-col gap-10 bg-cover bg-center w-full h-full border-b-2 border-green-400 z-0">
+      <div class="absolute top-0 bottom-0 right-0 left-0 z-10" style="background-color: rgba(0, 0, 0, 0.521);"></div>
+      <!--imagen principal-->
+      <div class="text_principa text-white text-center font-bold z-20">
+        <h2 class="text-lg md:text-3xl">¡Compara, ahorra tiempo y dinero!</h2>
+        <p class="md:text-lg text-sm">Múltiples opciones para asegurar tus bienes en un solo lugar</p>
+      </div>
+      <button class="btn_asegure bg-green-500 md:w-60 w-40 md:h-10 h-8 rounded-lg text-white transition duration-700 ease-in-out transform hover:scale-110 z-20" title="Asegurar">Asegurar Ya!</button>
+    </div>   
+  </header>
+  <!-- overlay -->
+  <div id="overlay" class="fixed inset-0 bg-opacity-50 hidden z-40" style="background-color: rgba(0, 0, 0, 0.548);"></div>
+  <!-- mensaje de servicios que ofrecemos en nuestro seguro -->
+  <div class="fixed inset-0 hidden justify-center items-center z-50" id="list_poliza">
+    <div class="bg-white relative p-6 rounded-lg shadow-lg w-full max-w-md sm:max-w-4xl h-auto max-h-[80vh] overflow-y-auto">
+      <button class="absolute top-1 right-1 flex items-center justify-center text-xl text-red-500 bg-slate-200 rounded-full w-6 h-6" id="btnXoverlay">x</button>
+      <h2 class="text-2xl font-bold text-center mb-6">Coberturas de Seguro de Autos</h2>
+      <div class="Box_text_poliza">
+  
+        <p class="mb-4 text-gray-700">
+          <strong>Responsabilidad Civil:</strong> Esta cobertura es esencial y protege al asegurado en caso de causar daños a terceros, ya sea en bienes materiales o lesiones personales. Es un requisito legal en la mayoría de los países.
+        </p>
+  
+        <p class="mb-4 text-gray-700">
+          <strong>Cobertura de Daños Propios:</strong> Esta póliza cubre los daños a tu propio vehículo en caso de accidente, independientemente de quién tenga la culpa. Puede incluir daños por colisiones, vuelcos y más.
+        </p>
+  
+        <p class="mb-4 text-gray-700">
+          <strong>Robo y Hurto:</strong> Protege tu vehículo contra robos y hurtos. Si tu auto es robado, recibirás una compensación económica que te ayudará a adquirir otro vehículo.
+        </p>
+  
+        <p class="mb-4 text-gray-700">
+          <strong>Incendio:</strong> Cubre los daños que pueda sufrir tu auto por incendios, ya sea por causas accidentales o intencionadas.
+        </p>
+  
+        <p class="mb-4 text-gray-700">
+          <strong>Asistencia en Carretera:</strong> Esta cobertura incluye servicios como grúas, cambio de llantas, y asistencia mecánica en caso de que tu vehículo se detenga en la carretera.
+        </p>
+  
+        <p class="mb-4 text-gray-700">
+          <strong>Cobertura de Cristales:</strong> Protege los cristales de tu auto, como el parabrisas y las ventanas, en caso de rotura o daño.
+        </p>
+  
+        <p class="mb-4 text-gray-700">
+          <strong>Lesiones Personales:</strong> Esta cobertura ayuda a pagar los gastos médicos para ti y tus pasajeros en caso de un accidente, independientemente de quién sea el culpable.
+        </p>
+  
+        <p class="mb-4 text-gray-700">
+          <strong>Cobertura de Accidentes Personales:</strong> Proporciona una compensación económica en caso de que tú o tus pasajeros sufran lesiones graves o fallezcan en un accidente.
+        </p>
+  
+        <p class="mb-4 text-gray-700">
+          <strong>Descuentos por Buen Conductor:</strong> Algunas aseguradoras ofrecen descuentos si no has tenido accidentes o reclamaciones en un período determinado, lo que puede disminuir tu prima.
+        </p>
+  
+        <p class="mb-4 text-gray-700">
+          <strong>Opciones de Pago Flexibles:</strong> El seguro de auto puede ofrecer diferentes planes de pago, ya sea mensual, trimestral o anual, para facilitar la gestión de tus finanzas.
+        </p>
+      </div>
+    </div>
+  </div>  
+   
+  <main class="main h-auto">
+    <h2 class="text-lg sm:text-2xl md:text-3xl text-center my-10">¿Cómo funciona el Comparador de <span class="font-bold">Seguros</span>?</h2>
+    <section class="bg-slate-200 h-96 flex justify-center items-center">
+      <div class="box_info flex md:justify-between justify-center  items-center h-full w-[1100px]">
+        <div class="img_pass_one md:block hidden h-[80%] w-[370px] shadow-2xl">
+          <img class="h-full w-full object-cover" src="img/img_dispositive.avif" alt="cotizar">
+        </div>
+        <div class="flex flex-col md:text-center justify-center h-[80%] md:w-[370px] w-4/5 text-gray-700 p-4">
+          <h3 class="text-2xl">COTIZA</h3>
+          <p>¡Ahorra tiempo y evita trámites engorrosos! Ingresa los datos solicitados desde tu computador, tableta o dispositivo móvil. Descubre todas las opciones disponibles en tiempo real para asegurarte.</p>
+        </div>
+      </div>
+    </section>
+    <section class="h-96 flex justify-center items-center">
+      <div class="box_info flex md:justify-between justify-center  items-center h-full w-[1100px]">
+        <div class="flex flex-col md:text-center justify-center h-[80%] md:w-[370px] w-4/5 text-gray-700 px-4">
+          <h3 class="text-2xl">COMPRA Y DECIDE</h3>
+          <p>En tan solo 60 segundos nuestro comparador hará todo el trabajo. Chequea todas las propuestas de reconocidas compañías aseguradoras, sin moverte del lugar donde estás… convertimos el proceso de asegurar tus bienes en algo rápido, fácil y seguro.</p>
+        </div>
+        <div class="img_pass_one md:block hidden h-[80%] w-[370px] shadow-2xl">
+          <img class="h-full w-full object-cover" src="img/img_cotizar.avif" alt="cotizar">
+        </div>
+      </div>
+    </section>
+    <section class="bg-slate-200 h-96 flex justify-center items-center">
+      <div class="box_info flex md:justify-between justify-center  items-center h-full w-[1100px]">
+        <div class="img_pass_one md:block hidden h-[80%] w-[370px] shadow-2xl">
+          <img class="h-full w-full object-cover" src="img/car_img_segure.avif" alt="cotizar">
+        </div>
+        <div class="flex flex-col md:text-center justify-center h-[80%] md:w-[370px] w-4/5 text-gray-700 p-4">
+          <h3 class="text-2xl">COMPRA</h3>
+          <p>Decide cuál de todas las alternativas disponibles es la que más se ajusta a tus necesidades: ¡Paga solo lo que es conveniente para ti! Y en menos de lo que esperas podrás suscribir tu póliza de seguro.</p>
+        </div>
+      </div>
+    </section>
+    <section class="relative flex items-center justify-center flex-col bg-cover bg-center md:h-96 h-[550px] text-white" id="nosotros" style="background-image: url('img/Background_nosotros.jpg'); background-attachment: fixed;">
+      <div class="absolute top-0 bottom-0 right-0 left-0 z-20" style="background-color: rgba(0, 0, 0, 0.5);"></div>
+      <h2 class="text-2xl md:text-3xl text-center my-5 z-30">¿Quiénes somos?</h2>
+      <div id="bgDiv" class="text_nosotros z-30 text-lg flex justify-center items-center bg-cover bg-center text-center md:w-[650px]">
+        <p>
+          En <span class="font-bold">Asegura Aquí!</span> somos un equipo apasionado y comprometido con la seguridad de tu vehículo en Venezuela. Sabemos que tu auto es más que un medio de transporte; es una inversión y una parte esencial de tu vida diaria. Por eso, nos dedicamos a ofrecerte las mejores soluciones de seguros para que puedas conducir con tranquilidad y confianza. Nuestra misión es brindarte una experiencia de aseguramiento accesible y transparente, adaptándonos a tus necesidades y ofreciéndote las coberturas más adecuadas.
+        </p>
+      </div>
+  </section>
+  </main>
+  <footer class="footer flex justify-center items-center md:h-72 md:py-0 py-5 bg-slate-200" id="Contactos">
+    <div class="Box_footer flex md:justify-between justify-center md:flex-row flex-col items-center h-full w-[1100px]">
+      <div class="redes_icons relative h-52 md:w-1/3 w-full flex justify-center flex-col items-center">
+        <div class="title_logo flex justify-evenly items-center text-xl absolute top-0 cursor-pointer" title="logo">
+          <h2>Asegura Aqui!</h2>
+          <img src="img/logo.png" class="object-center w-7" alt="logo">
+        </div>
+        <h4>¡Gracias por elegir Asegura Aquí!</h4>
+        <p class="sm:w-[350px] md:w-[250px] text-center text-sm">
+          Agradecemos sinceramente tu confianza en nosotros para proteger tu vehículo. Estamos comprometidos a brindarte el mejor servicio y apoyo en cada paso del camino. ¡Tu tranquilidad es nuestra prioridad!
+        </p>
+      </div>
+      <div class="contactos relative h-52 md:w-1/3 w-full flex flex-col justify-center items-center">
+        <h3 class="text-xl absolute top-0">Contactos</h3>
+        <span class="font-bold">E-mail : </span>
+        <p>Klibel.a.romero@gmail.com</p>
+        <span class="font-bold">Telefono : </span>
+        <p>(0412) 104-03-77</p>
+      </div>
+      <div class="redes_icons relative h-52 md:w-1/3 w-full flex justify-around items-center">
+        <h3 class="text-xl absolute top-0">Redes</h3>
+        <div class="icon_redes w-8">
+          <img class="w-full h-full object-cover" src="img/Facebook_icon.png" alt="Facebook_icon">
+        </div>
+        <div class="icon_redes w-8">
+          <img class="w-full h-full object-cover" src="img/YouTube_icon.png" alt="YouTube_icon">
+        </div>
+        <div class="icon_redes w-8">
+          <img class="w-full h-full object-cover" src="img/Instagram_icon.png" alt="Instagram_icon">
+        </div>
+      </div>
+    </div>
+  </footer>
+  <div class="flex justify-center items-center text-center md:h-36 h-48 border-y border-gray-300 text-gray-700">
+    <div class="w-[1100px]">
+      <h2 class="border-b">Legales │ Términos y Condiciones │ Política de Privacidad │ Prevención y Legitimación de Capitales</h2>
+      <p><span class="font-bold">Asegura Aquí!</span> marca registrada
+        Dirección: Avenida Francisco de Miranda, Edifício Cavendes, piso 11. Oficina 11-03. Punto Fijo - Venezuela.
+      </p>
+    </div>
+  </div>
+  <script src="js/index.js"></script>
+</body>
+</html>
