@@ -9,6 +9,8 @@ const overlayDiv = document.querySelector('#overlay');
 const listPoliza = document.querySelector('#list_poliza');
 const btnXoverlay = document.querySelector('#btnXoverlay');
 const enlaces = document.querySelectorAll('.list_menu .lin')
+const confir = document.querySelector('#confir');
+const btnListo = document.querySelector('#btn_listo');
 
 // datos del cliente
 let cliente = {
@@ -41,6 +43,10 @@ const email = document.querySelector('#email');
 document.addEventListener('DOMContentLoaded', (e) => {
   windowResponsibility();
 });
+
+btnListo.addEventListener('click', e => {
+  window.location.href = 'index.html'
+})
 
 btnExit.addEventListener('click', e => {
   menuLateral.style.display = "none";
@@ -251,6 +257,13 @@ function validarInfo(){
   }
 }
 
+function listo() {
+  if (overlayDiv.classList.contains('hidden')) {
+    overlayDiv.style.display = 'flex';
+    confir.style.display = 'flex';
+  }
+}
+
 // generando el documento del ciente 
 
 async function generarPDF(cliente, carro) {
@@ -321,7 +334,8 @@ async function generarPDF(cliente, carro) {
 
 //   // Descargar el PDF
   doc.save(`Póliza de seguro automotriz(${car} ${marca} ${year}).pdf`);
-}
+  listo();
+};
 
 
 

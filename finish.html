@@ -33,7 +33,15 @@
         </div>
       </div>
     </header>
-      <!-- overlay -->
+    <!-- mensaje de confirmacion de exito! -->
+    <div class="fixed inset-0 hidden justify-center items-center z-50" id="confir">
+      <div class="flex flex-col items-center justify-center bg-white relative p-6 rounded-lg shadow-lg lg:w-[750px] md:w-[680px] sm:w-[580px] w-[98%] h-auto">
+        <h2 class="text-2xl font-bold mb-6">confirmacion de Póliza de seguro</h2>
+        <p class="text-lg text-center">Su seguro se descargo con exito en su dispositivo, <br> ¡Gracias por elegir Asegura Aquí!</p>
+        <button id="btn_listo" class="bg-green-400 h-8 w-24 rounded-lg text-slate-800 my-4 transition duration-700 ease-in-out transform hover:scale-110">Listo!</button>
+      </div>
+    </div> 
+    <!-- overlay -->
     <div id="overlay" class="fixed inset-0 bg-opacity-50 hidden z-40" style="background-color: rgba(0, 0, 0, 0.548);"></div>
     <!-- mensaje de servicios que ofrecemos en nuestro seguro -->
     <div class="fixed inset-0 hidden justify-center items-center z-50" id="list_poliza">
