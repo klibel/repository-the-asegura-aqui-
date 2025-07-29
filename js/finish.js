@@ -25,7 +25,7 @@ let cliente = {
   telefono: "",
   email: ""
 }
-//
+
 
 //inputs del form 
 const idenSelect = document.querySelector('#idenSelect');
@@ -264,7 +264,7 @@ function listo() {
   }
 }
 
-// generando el documento del ciente 
+// generando el documento del ciente
 
 async function generarPDF(cliente, carro) {
   const {typeCI, cedula, nombre, apellido, fecha, genero, estado, linea, telefono, email} = cliente;
