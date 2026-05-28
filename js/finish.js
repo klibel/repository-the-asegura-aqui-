@@ -8,13 +8,13 @@ const linSercio = document.querySelectorAll('.lin_sercio');
 const overlayDiv = document.querySelector('#overlay');
 const listPoliza = document.querySelector('#list_poliza');
 const btnXoverlay = document.querySelector('#btnXoverlay');
-const enlaces = document.querySelectorAll('.list_menu .lin')
+const enlaces = document.querySelectorAll('.menu_lateral .nav-link');
 const confir = document.querySelector('#confir');
 const btnListo = document.querySelector('#btn_listo');
 
-// datos del cliente
+// Datos del cliente
 let cliente = {
-  typeCI: "",
+  typeCI: "V", // Valor inicial por defecto
   cedula: "",
   nombre: "",
   apellido: "",
@@ -26,8 +26,7 @@ let cliente = {
   email: ""
 }
 
-
-//inputs del form 
+// Inputs del form 
 const idenSelect = document.querySelector('#idenSelect');
 const inputCedula = document.querySelector('#inputCedula');
 const nameCompleto = document.querySelector('#nameCompleto');
@@ -38,33 +37,32 @@ const estadoCivilSelect = document.querySelector('#estadoCivilSelect');
 const numberCelSelect = document.querySelector('#numberCelSelect');
 const inpuTelefono = document.querySelector('#inpuTelefono');
 const email = document.querySelector('#email');
-//
 
-document.addEventListener('DOMContentLoaded', (e) => {
+document.addEventListener('DOMContentLoaded', () => {
   windowResponsibility();
 });
 
-btnListo.addEventListener('click', e => {
-  window.location.href = 'index.html'
-})
-
-btnExit.addEventListener('click', e => {
-  menuLateral.style.display = "none";
+btnListo.addEventListener('click', () => {
+  window.location.href = 'index.html';
 });
 
-btnMenu.addEventListener('click', e => {
-  menuLateral.style.display = "flex";
+btnExit.addEventListener('click', () => {
+  menuLateral.classList.add('hidden');
+});
+
+btnMenu.addEventListener('click', () => {
+  menuLateral.classList.remove('hidden');
 });
 
 function windowResponsibility() {
-  if (window.innerWidth > 800) {
-    menuLateral.style.display = "none"; 
+  if (window.innerWidth > 768) {
+    menuLateral.classList.add('hidden'); 
   }
 }
 
 enlaces.forEach(enlace => {
-  enlace.addEventListener('click', function(event) { 
-    menuLateral.style.display ="none"
+  enlace.addEventListener('click', () => { 
+    menuLateral.classList.add('hidden');
   });
 });
 
@@ -72,203 +70,165 @@ linSercio.forEach(boton => {
   boton.addEventListener('click', overlay);
 });
 
-btnXoverlay.addEventListener('click', e => {
-  overlayDiv.style.display = 'none';
-  listPoliza.style.display = 'none'
-})
+btnXoverlay.addEventListener('click', () => {
+  overlayDiv.classList.add('hidden');
+  listPoliza.classList.add('hidden');
+});
 
-function overlay(){
-  if (overlayDiv.classList.contains('hidden')|| listPoliza.classList.contains('hidden')) {
-    overlayDiv.style.display = 'flex';
-    listPoliza.style.display = 'flex';
-  }
+function overlay() {
+  overlayDiv.classList.remove('hidden');
+  listPoliza.classList.remove('hidden');
 }
 
 window.addEventListener('resize', windowResponsibility);
 
-// validar inputs (eventos)
+// Funciones de estilos para validación utilitaria
+function marcarValido(elemento) {
+  elemento.classList.remove('border-slate-200', 'border-red-500', 'focus:ring-green-400/50');
+  elemento.classList.add('border-blue-500', 'focus:ring-blue-500/50');
+}
 
+function marcarInvalido(elemento) {
+  elemento.classList.remove('border-slate-200', 'border-blue-500', 'focus:ring-green-400/50');
+  elemento.classList.add('border-red-500', 'focus:ring-red-500/50');
+}
+
+// Validar inputs (eventos)
 idenSelect.addEventListener('change', e => {
-  const iden = e.target.value
-  validarIdent(iden);
+  if (e.target.value) {
+    marcarValido(idenSelect);
+    cliente.typeCI = e.target.value;
+  } else {
+    marcarInvalido(idenSelect);
+    cliente.typeCI = "";
+  }
 });
 
-inputCedula.addEventListener('keyup', e => {
-  const cedula = e.target.value
-  validarNumIdent(cedula);
+inputCedula.addEventListener('input', e => {
+  const regex = /^\d{7,8}$/;
+  if (regex.test(e.target.value)) {
+    marcarValido(inputCedula);
+    cliente.cedula = e.target.value;
+  } else {
+    marcarInvalido(inputCedula);
+    cliente.cedula = "";
+  }
 });
 
-nameCompleto.addEventListener('keyup', e => {
-  const nombre = e.target.value 
-  validarName(nombre);
+nameCompleto.addEventListener('input', e => {
+  const regex = /^[a-zA-ZÁéíóúáÉÍÓÚñÑ\s]{3,25}$/;
+  if (regex.test(e.target.value.trim())) {
+    marcarValido(nameCompleto);
+    cliente.nombre = e.target.value.trim();
+  } else {
+    marcarInvalido(nameCompleto);
+    cliente.nombre = "";
+  }
 });
 
-apellidoCompleto.addEventListener('keyup', e => {
-  const apellido = e.target.value 
-  validarApellido(apellido);
+apellidoCompleto.addEventListener('input', e => {
+  const regex = /^[a-zA-ZÁéíóúáÉÍÓÚñÑ\s]{3,25}$/;
+  if (regex.test(e.target.value.trim())) {
+    marcarValido(apellidoCompleto);
+    cliente.apellido = e.target.value.trim();
+  } else {
+    marcarInvalido(apellidoCompleto);
+    cliente.apellido = "";
+  }
 });
 
 fechaNacimiento.addEventListener('change', e => {
-  const fecha = e.target.value
-  validarFechaNaci(fecha);
+  if (e.target.value) {
+    marcarValido(fechaNacimiento);
+    cliente.fecha = e.target.value;
+  } else {
+    marcarInvalido(fechaNacimiento);
+    cliente.fecha = "";
+  }
 });
 
 generoSelect.addEventListener('change', e => {
-  const genero = e.target.value
-  validarGenero(genero);
+  if (e.target.value) {
+    marcarValido(generoSelect);
+    cliente.genero = e.target.value;
+  } else {
+    marcarInvalido(generoSelect);
+    cliente.genero = "";
+  }
 });
 
 estadoCivilSelect.addEventListener('change', e => {
-  const civilEstado = e.target.value
-  validarEstadoCivil(civilEstado);
+  if (e.target.value) {
+    marcarValido(estadoCivilSelect);
+    cliente.estado = e.target.value;
+  } else {
+    marcarInvalido(estadoCivilSelect);
+    cliente.estado = "";
+  }
 });
 
 numberCelSelect.addEventListener('change', e => {
-  const celSelet = e.target.value
-  validarLineaTelefono(celSelet);
+  if (e.target.value) {
+    marcarValido(numberCelSelect);
+    cliente.linea = e.target.value;
+  } else {
+    marcarInvalido(numberCelSelect);
+    cliente.linea = "";
+  }
 });
 
-inpuTelefono.addEventListener('keyup', e => {
-  const telefono = e.target.value
-  validarNumeroTelefono(telefono);
-});
-
-email.addEventListener('keyup', e => {
-  const Email = e.target.value
-  validarEmail(Email);
-});
-
-// funciono que chequea si se valida
-
-function validarIdent(selectCedula) {
-  if (selectCedula) {
-    idenSelect.style.border = 'solid 2px blue';
-    cliente.typeCI = selectCedula;
-  } else {
-    idenSelect.style.border = 'solid 2px red';
-  }
-}
-
-function validarNumIdent(cedula) {
-  const regex = /^\d{7,8}$/;
-  if (regex.test(cedula)) {
-    inputCedula.style.border = 'solid 2px blue';
-    cliente.cedula = cedula;
-  } else {
-    inputCedula.style.border = 'solid 2px red';
-  }
-}
-
-function validarName(nombre) {
-  const regex = /^[a-zA-Z]{3,10} [a-zA-Z]{3,10}$/
-  if (regex.test(nombre)) {
-    nameCompleto.style.border = 'solid 2px blue';
-    cliente.nombre = nombre;
-  } else {
-    nameCompleto.style.border = 'solid 2px red';
-  }
-}
-
-function validarApellido(apellido) {
-  const regex = /^[a-zA-Z]{3,10} [a-zA-Z]{3,10}$/
-  if (regex.test(apellido)) {
-    apellidoCompleto.style.border = 'solid 2px blue';
-    cliente.apellido = apellido;
-  } else {
-    apellidoCompleto.style.border = 'solid 2px red';
-  }
-}
-
-function validarFechaNaci(fecha) {
-  const regex = /^(19[789][0-9]|200[0-6])-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;
-  if (regex.test(fecha)) {
-    fechaNacimiento.style.border = 'solid 2px blue';
-    cliente.fecha = fecha;
-  } else {
-    fechaNacimiento.style.border = 'solid 2px red';
-  }
-}
-
-function validarGenero(genero) {
-  if (genero) {
-    generoSelect.style.border = 'solid 2px blue';
-    cliente.genero = genero;
-  } else {
-    generoSelect.style.border = 'solid 2px red';
-  }
-}
-
-function validarEstadoCivil(estado) {
-  if (estado) {
-    estadoCivilSelect.style.border = 'solid 2px blue';
-    cliente.estado = estado;
-  } else {
-    estadoCivilSelect.style.border = 'solid 2px red';
-  }
-}
-
-function validarLineaTelefono(linea) {
-  if (linea) {
-    numberCelSelect.style.border = 'solid 2px blue';
-    cliente.linea = linea;
-  } else {
-    numberCelSelect.style.border = 'solid 2px red';
-  }
-}
-
-function validarNumeroTelefono(telefono) {
+inpuTelefono.addEventListener('input', e => {
   const regex = /^\d{7}$/;
-  if (regex.test(telefono)) {
-    inpuTelefono.style.border = 'solid 2px blue';
-    cliente.telefono = telefono;
+  if (regex.test(e.target.value)) {
+    marcarValido(inpuTelefono);
+    cliente.telefono = e.target.value;
   } else {
-    inpuTelefono.style.border = 'solid 2px red';
+    marcarInvalido(inpuTelefono);
+    cliente.telefono = "";
   }
-}
+});
 
-function validarEmail(Email) {
+email.addEventListener('input', e => {
   const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  if (regex.test(Email)) {
-    email.style.border = 'solid 2px blue';
-    cliente.email = Email;
+  if (regex.test(e.target.value)) {
+    marcarValido(email);
+    cliente.email = e.target.value;
   } else {
-    email.style.border = 'solid 2px red';
+    marcarInvalido(email);
+    cliente.email = "";
   }
-}
+});
 
-// validar todo el formulario
-
-btnContinue.addEventListener('click', e => {
+// Validar todo el formulario
+btnContinue.addEventListener('click', () => {
   if (!checkbox.checked) {
-    msjAlert.innerHTML = `<p class="text-red-500">Debes aceptar las políticas de seguridad para continuar</p>`;
+    msjAlert.innerHTML = `<p class="text-red-500 font-medium">Debes aceptar las políticas de seguridad para continuar</p>`;
   } else {
     msjAlert.innerHTML = ``;
     validarInfo();
   }
-})
+});
 
-function validarInfo(){
-  const {typeCI, cedula, nombre, apellido, fecha, genero, estado, linea, telefono, email} = cliente;
+function validarInfo() {
+  const { typeCI, cedula, nombre, apellido, fecha, genero, estado, linea, telefono, email } = cliente;
   const datosCar = JSON.parse(localStorage.getItem('DatosCar'));
+  
   if (typeCI && cedula && nombre && apellido && fecha && genero && estado && linea && telefono && email) {
     generarPDF(cliente, datosCar);
   } else {
-    msjAlert.innerHTML = `<p class="text-red-500">Completa todos los campos de manera correcta</p>`;
+    msjAlert.innerHTML = `<p class="text-red-500 font-medium">Completa todos los campos de manera correcta</p>`;
   }
 }
 
 function listo() {
-  if (overlayDiv.classList.contains('hidden')) {
-    overlayDiv.style.display = 'flex';
-    confir.style.display = 'flex';
-  }
+  overlayDiv.classList.remove('hidden');
+  confir.classList.remove('hidden');
 }
 
-// generando el documento del ciente
-
+// Generando el documento del cliente
 async function generarPDF(cliente, carro) {
-  const {typeCI, cedula, nombre, apellido, fecha, genero, estado, linea, telefono, email} = cliente;
-  const {car, marca, year} = carro;
+  const { typeCI, cedula, nombre, apellido, fecha, genero, estado, linea, telefono, email } = cliente;
+  const { car, marca, year } = carro || { car: 'N/A', marca: 'N/A', year: 'N/A' };
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
 
@@ -286,7 +246,7 @@ async function generarPDF(cliente, carro) {
   doc.text(mensaje, posicionX, 30); 
 
   doc.setFontSize(8);
-  doc.text("Muchas gracias por haber elegido a Asegura Aqui!.com para asegurar tu auto y poder confiar en nosotros.", 10, 40);
+  doc.text("Muchas gracias por haber elegido a Asegura Aqui! para asegurar tu auto y poder confiar en nosotros.", 10, 40);
   doc.text("A continuación, te presentamos las coberturas incluidas en tu póliza:", 10, 50);
   doc.text("1. Responsabilidad Civil: Esta cobertura es esencial y protege al asegurado en caso de causar daños a terceros.", 10, 60);
   doc.text("2. Cobertura de Daños Propios: Cubre los daños a tu propio vehículo en caso de accidente, independientemente de quién tenga la culpa.", 10, 70);
@@ -321,24 +281,10 @@ async function generarPDF(cliente, carro) {
   doc.text(`Modelo: ${car}`, posicionDerechaX, 190);
   doc.text(`Año: ${year}`, posicionDerechaX, 200);
 
-//   // Código de Solicitud
-//   doc.setFontSize(10);
-//  const msj = ``;
-//   const msjFinal = (anchoPDF / 2) - (doc.getTextWidth(msj) / 2);
-//   doc.text(firma, msjFinal, 270);
-
-//   // Firma centrada
-//   const firma = `Cordialmente, El equipo de Asegura Aqui!.com`;
-//   const posicionFirmaX = (anchoPDF / 2) - (doc.getTextWidth(firma) / 2);
-//   doc.text(firma, posicionFirmaX, 290); // Firma centrada
-
-//   // Descargar el PDF
-  doc.save(`Póliza de seguro automotriz(${car} ${marca} ${year}).pdf`);
+  // Descargar el PDF
+  doc.save(`Poliza_de_seguro_automotriz_${car}_${marca}.pdf`);
   listo();
-};
-
-
-
+}
 
 
 

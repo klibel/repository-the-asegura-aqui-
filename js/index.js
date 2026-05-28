@@ -1,60 +1,104 @@
+// --- SELECTORES DEL DOM ---
 const btnExit = document.querySelector('.exit_menu');
 const btnMenu = document.querySelector('.menu');
 const btnAseg = document.querySelector('.btn_asegure');
 const menuLateral = document.querySelector('.menu_lateral');
-const enlaces = document.querySelectorAll('.list_menu .lin');
-const linSercio = document.querySelectorAll('.lin_sercio');
+const enlacesMenu = document.querySelectorAll('.menu_lateral .nav-link');
+const enlacesNav = document.querySelectorAll('.nav-link'); // Selecciona todos los enlaces de navegación
+const linServicio = document.querySelectorAll('.lin_sercio');
 const overlayDiv = document.querySelector('#overlay');
 const listPoliza = document.querySelector('#list_poliza');
 const btnXoverlay = document.querySelector('#btnXoverlay');
 
-document.addEventListener('DOMContentLoaded', (e) => {
-  windowResponsibility();
+// --- MANEJADORES DE EVENTOS (LISTENERS) ---
+
+document.addEventListener('DOMContentLoaded', () => {
+  verificarResolucion();
 });
 
-btnExit.addEventListener('click', e => {
-  menuLateral.style.display = "none";
+// Control del Menú Lateral Móvil
+btnMenu.addEventListener('click', (e) => {
+  e.preventDefault();
+  menuLateral.classList.remove('hidden');
+  menuLateral.classList.add('flex');
 });
 
-btnMenu.addEventListener('click', e => {
-  menuLateral.style.display = "flex";
+btnExit.addEventListener('click', (e) => {
+  e.preventDefault();
+  cerrarMenuLateral();
 });
 
-function windowResponsibility() {
-  if (window.innerWidth > 800) {
-    menuLateral.style.display = "none"; 
-  }
+// Cerrar menú móvil al hacer click en cualquier opción
+enlacesMenu.forEach(enlace => {
+  enlace.addEventListener('click', () => cerrarMenuLateral());
+});
+
+// Redirección del botón Asegurar Ya!
+if (btnAseg) {
+  btnAseg.addEventListener('click', () => {
+    window.location.href = "income.html";
+  });
 }
 
-btnAseg.addEventListener('click', e => {
-  window.location.href = "income.html";
-})
-
-enlaces.forEach(enlace => {
-  enlace.addEventListener('click', function(event) { 
-    menuLateral.style.display ="none"
+// Control del Modal de Servicios (Poliza)
+linServicio.forEach(boton => {
+  boton.addEventListener('click', (e) => {
+    e.preventDefault();
+    abrirModalServicios();
   });
 });
 
-linSercio.forEach(boton => {
-  boton.addEventListener('click', overlay);
+btnXoverlay.addEventListener('click', cerrarModalServicios);
+overlayDiv.addEventListener('click', cerrarModalServicios); // Cerrar también si se pisa fuera del recuadro blanco
+
+// Control del cambio de tamaño de pantalla
+window.addEventListener('resize', verificarResolucion);
+
+// --- NAVEGACIÓN LIMPIA (Desplazamiento suave y remover '#' de la URL) ---
+enlacesNav.forEach(link => {
+  link.addEventListener('click', function(e) {
+    const targetId = this.getAttribute('href');
+    
+    // Ejecutar solo si es un enlace de anclaje interno que empiece con '#'
+    if (targetId && targetId.startsWith('#')) {
+      e.preventDefault();
+      const targetElement = document.querySelector(targetId);
+      
+      if (targetElement) {
+        // Desplazamiento suave nativo del navegador
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+        
+        // Limpia el '#' de la barra de direcciones del navegador sin recargar la página
+        window.history.pushState(null, null, ' ');
+      }
+    }
+  });
 });
 
-btnXoverlay.addEventListener('click', e => {
-  overlayDiv.style.display = 'none';
-  listPoliza.style.display = 'none'
-})
 
-function overlay(){
-  if (overlayDiv.classList.contains('hidden')|| listPoliza.classList.contains('hidden')) {
-    overlayDiv.style.display = 'flex';
-    listPoliza.style.display = 'flex';
-  }
+// --- FUNCIONES AUXILIARES ---
+
+function cerrarMenuLateral() {
+  menuLateral.classList.remove('flex');
+  menuLateral.classList.add('hidden');
 }
 
-window.addEventListener('resize', windowResponsibility);
+function abrirModalServicios() {
+  cerrarMenuLateral(); // Por si abren el modal desde el menú móvil
+  overlayDiv.classList.remove('hidden');
+  listPoliza.classList.remove('hidden');
+  listPoliza.classList.add('flex');
+}
 
+function cerrarModalServicios() {
+  overlayDiv.classList.add('hidden');
+  listPoliza.classList.remove('flex');
+  listPoliza.classList.add('hidden');
+}
 
-
-
-
+function verificarResolucion() {
+  // 768px es el breakpoint oficial de Tailwind para 'md' (Medium devices)
+  if (window.innerWidth >= 768) {
+    cerrarMenuLateral();
+  }
+}
